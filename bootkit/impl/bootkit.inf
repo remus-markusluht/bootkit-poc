@@ -1,0 +1,41 @@
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = bootkit
+  FILE_GUID      = 6987936E-ED34-44db-AE97-1FA5E4ED2116
+  MODULE_TYPE    = DXE_RUNTIME_DRIVER
+  VERSION_STRING = 1.0
+  ENTRY_POINT    = CuteMain
+
+[Sources]
+  bootkit.cpp
+  ../core/library/hook/hook_handler.cpp
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  BaseLib
+  BaseMemoryLib
+  UefiDriverEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiRuntimeLib
+  UefiLib
+  PcdLib
+  SerialPortLib
+
+[Protocols]
+  gEfiCpuArchProtocolGuid
+  gEfiGraphicsOutputProtocolGuid
+  gEfiLoadedImageProtocolGuid
+
+[Guids]
+  gEfiEventVirtualAddressChangeGuid
+
+[Depex]
+  gEfiCpuArchProtocolGuid
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /I$(MODULE_DIR)\..\core\include /I$(MODULE_DIR)\..\core\library\runtime /I$(MODULE_DIR)\..\core\library\boot /I$(MODULE_DIR)\..\core\library\hook /I$(MODULE_DIR)\..\core\library\memory /I$(MODULE_DIR)\..\core\library\paging /I$(MODULE_DIR)\..\core\library\process /I$(MODULE_DIR)\..\core\library\modules /I$(MODULE_DIR)\..\core\library\requests /I$(MODULE_DIR)\..\core\library\utility /I$(MODULE_DIR)\..\core\library\diagnostics /I$(MODULE_DIR)\..\..\edk2\generated /WX-
+  MSFT:*_*_*_DLINK_FLAGS = /SUBSYSTEM:EFI_RUNTIME_DRIVER

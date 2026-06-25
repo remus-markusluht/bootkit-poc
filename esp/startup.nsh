@@ -1,0 +1,2 @@
+FS0:
+load \EFI\BOOT\BOOTX64.EFI

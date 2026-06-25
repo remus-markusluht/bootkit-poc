@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{7DDF00C8-7E5C-4D2A-8E7F-9D33D6F405A1}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+    <RootNamespace>bootkit</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup>
+    <RepoRoot>$([System.IO.Path]::GetFullPath('$(ProjectDir)..\'))</RepoRoot>
+    <Edk2Workspace Condition="'$(EDK2_WORKSPACE)' != ''">$(EDK2_WORKSPACE)</Edk2Workspace>
+    <Edk2Workspace Condition="'$(Edk2Workspace)' == ''">$([System.IO.Path]::GetFullPath('$(ProjectDir)..\..'))</Edk2Workspace>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeBuildCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(RepoRoot)tools\build-edk2.ps1" -Target DEBUG -Module Bootkit</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(RepoRoot)tools\build-edk2.ps1" -Target DEBUG -Module Bootkit -Clean</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(RepoRoot)tools\build-edk2.ps1" -Target DEBUG -Module Bootkit -Clean</NMakeCleanCommandLine>
+    <NMakeOutput>$(Edk2Workspace)\Build\BootkitPkg\DEBUG_VS2022\X64\bootkit.efi</NMakeOutput>
+    <NMakePreprocessorDefinitions>MDE_CPU_X64;EFIAPI=__cdecl;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(ProjectDir)core\include;$(ProjectDir)core\library\runtime;$(ProjectDir)core\library\boot;$(ProjectDir)core\library\hook;$(ProjectDir)core\library\memory;$(ProjectDir)core\library\paging;$(ProjectDir)core\library\process;$(ProjectDir)core\library\modules;$(ProjectDir)core\library\requests;$(ProjectDir)core\library\utility;$(ProjectDir)core\library\diagnostics;$(RepoRoot)edk2\generated;$(Edk2Workspace)\MdePkg\Include;$(Edk2Workspace)\MdePkg\Include\X64;$(Edk2Workspace)\MdeModulePkg\Include;$(Edk2Workspace)\Build\BootkitPkg\DEBUG_VS2022\X64\BootkitPkg\bootkit\impl\bootkit\DEBUG</NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeBuildCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(RepoRoot)tools\build-edk2.ps1" -Target RELEASE -Module Bootkit</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(RepoRoot)tools\build-edk2.ps1" -Target RELEASE -Module Bootkit -Clean</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(RepoRoot)tools\build-edk2.ps1" -Target RELEASE -Module Bootkit -Clean</NMakeCleanCommandLine>
+    <NMakeOutput>$(Edk2Workspace)\Build\BootkitPkg\RELEASE_VS2022\X64\bootkit.efi</NMakeOutput>
+    <NMakePreprocessorDefinitions>MDE_CPU_X64;EFIAPI=__cdecl;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(ProjectDir)core\include;$(ProjectDir)core\library\runtime;$(ProjectDir)core\library\boot;$(ProjectDir)core\library\hook;$(ProjectDir)core\library\memory;$(ProjectDir)core\library\paging;$(ProjectDir)core\library\process;$(ProjectDir)core\library\modules;$(ProjectDir)core\library\requests;$(ProjectDir)core\library\utility;$(ProjectDir)core\library\diagnostics;$(RepoRoot)edk2\generated;$(Edk2Workspace)\MdePkg\Include;$(Edk2Workspace)\MdePkg\Include\X64;$(Edk2Workspace)\MdeModulePkg\Include;$(Edk2Workspace)\Build\BootkitPkg\RELEASE_VS2022\X64\BootkitPkg\bootkit\impl\bootkit\DEBUG</NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="core\library\hook\hook_handler.cpp" />
+    <ClCompile Include="impl\bootkit.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="core\include\*.hpp" />
+    <ClInclude Include="core\library\boot\*.hpp" />
+    <ClInclude Include="core\library\diagnostics\*.hpp" />
+    <ClInclude Include="core\library\hook\*.hpp" />
+    <ClInclude Include="core\library\memory\physical_memory.hpp" />
+    <ClInclude Include="core\library\memory\tools.hpp" />
+    <ClInclude Include="core\library\modules\*.hpp" />
+    <ClInclude Include="core\library\paging\*.hpp" />
+    <ClInclude Include="core\library\runtime\*.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="impl\bootkit.inf" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

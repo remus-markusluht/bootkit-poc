@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{C5CDEEB0-C10D-44C5-85F8-D9BF35B17A88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{E2F35AB0-B250-4CB3-AC71-9B8061F62544}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EDK II">
+      <UniqueIdentifier>{04F14B4F-2671-4D45-8E24-52C3786772A0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{CFF6A514-60AA-4CE2-B610-396E7CDE16C0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="bootkit.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="embedded_loader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="context.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ebs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="global.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hook.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="hook_handler.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="log.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="memory.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="tools.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="virtual_address_map_handler.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="bootkit_embedded.hpp" />
+    <ClInclude Include="keys.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bootkit.inf">
+      <Filter>EDK II</Filter>
+    </None>
+    <None Include="BootkitPkg.dsc">
+      <Filter>EDK II</Filter>
+    </None>
+    <None Include="BUILDING.md">
+      <Filter>EDK II</Filter>
+    </None>
+    <None Include=".vscode\c_cpp_properties.json">
+      <Filter>Tools</Filter>
+    </None>
+    <None Include=".vscode\tasks.json">
+      <Filter>Tools</Filter>
+    </None>
+    <None Include="tools\build-edk2.ps1">
+      <Filter>Tools</Filter>
+    </None>
+    <None Include="embedded_loader.inf" />
+    <None Include="tools\embed_bootkit.py">
+      <Filter>Tools</Filter>
+    </None>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,17 @@
+Build/
+build/
+.vs/
+*.user
+*.log
+*.suo
+*.VC.db
+*.VC.VC.opendb
+x64/
+Win32/
+Debug/
+Release/
+*.obj
+*.exe
+*.rar
+tools/secure-boot-keys/*.key
+tools/secure-boot-keys/*.pfx

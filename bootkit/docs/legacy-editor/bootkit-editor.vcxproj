@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <ProjectGuid>{D7B2D1F1-5213-4D25-BF4F-9BCE85B3FA0B}</ProjectGuid>
+    <Keyword>MakeFileProj</Keyword>
+    <RootNamespace>bootkit</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup>
+    <Edk2Workspace Condition="'$(EDK2_WORKSPACE)' != ''">$(EDK2_WORKSPACE)</Edk2Workspace>
+    <Edk2Workspace Condition="'$(Edk2Workspace)' == ''">$([System.IO.Path]::GetFullPath('$(ProjectDir)..\..'))</Edk2Workspace>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ConfigurationType>Makefile</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <NMakeBuildCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)tools\build-edk2.ps1" -Target DEBUG</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)tools\build-edk2.ps1" -Target DEBUG -Clean</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)tools\build-edk2.ps1" -Target DEBUG -Clean</NMakeCleanCommandLine>
+    <NMakeOutput>$(Edk2Workspace)\Build\BootkitPkg\DEBUG_VS2022\X64\bootkit.efi</NMakeOutput>
+    <NMakePreprocessorDefinitions>MDE_CPU_X64;EFIAPI=__cdecl;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(ProjectDir);$(Edk2Workspace)\MdePkg\Include;$(Edk2Workspace)\MdePkg\Include\X64;$(Edk2Workspace)\MdeModulePkg\Include;$(Edk2Workspace)\Build\BootkitPkg\DEBUG_VS2022\X64\BootkitPkg\bootkit\bootkit\DEBUG</NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <NMakeBuildCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)tools\build-edk2.ps1" -Target RELEASE</NMakeBuildCommandLine>
+    <NMakeReBuildCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)tools\build-edk2.ps1" -Target RELEASE -Clean</NMakeReBuildCommandLine>
+    <NMakeCleanCommandLine>powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(ProjectDir)tools\build-edk2.ps1" -Target RELEASE -Clean</NMakeCleanCommandLine>
+    <NMakeOutput>$(Edk2Workspace)\Build\BootkitPkg\RELEASE_VS2022\X64\bootkit.efi</NMakeOutput>
+    <NMakePreprocessorDefinitions>MDE_CPU_X64;EFIAPI=__cdecl;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
+    <NMakeIncludeSearchPath>$(ProjectDir);$(Edk2Workspace)\MdePkg\Include;$(Edk2Workspace)\MdePkg\Include\X64;$(Edk2Workspace)\MdeModulePkg\Include;$(Edk2Workspace)\Build\BootkitPkg\RELEASE_VS2022\X64\BootkitPkg\bootkit\bootkit\DEBUG</NMakeIncludeSearchPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <ClCompile Include="bootkit.cpp" />
+    <ClCompile Include="embedded_loader.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="bootkit_embedded.hpp" />
+    <ClInclude Include="context.hpp" />
+    <ClInclude Include="ebs.hpp" />
+    <ClInclude Include="global.hpp" />
+    <ClInclude Include="hook.hpp" />
+    <ClInclude Include="hook_handler.hpp" />
+    <ClInclude Include="keys.hpp" />
+    <ClInclude Include="log.hpp" />
+    <ClInclude Include="memory.hpp" />
+    <ClInclude Include="structs.hpp" />
+    <ClInclude Include="tools.hpp" />
+    <ClInclude Include="virtual_address_map_handler.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bootkit.inf" />
+    <None Include="BootkitPkg.dsc" />
+    <None Include="BUILDING.md" />
+    <None Include=".vscode\c_cpp_properties.json" />
+    <None Include=".vscode\tasks.json" />
+    <None Include="embedded_loader.inf" />
+    <None Include="tools\build-edk2.ps1" />
+    <None Include="tools\embed_bootkit.py" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

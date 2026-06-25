@@ -1,0 +1,30 @@
+[Defines]
+  INF_VERSION    = 0x00010005
+  BASE_NAME      = embedded_loader
+  FILE_GUID      = 87654321-DCBA-4321-ABCD-1234567890AB
+  MODULE_TYPE    = UEFI_APPLICATION
+  VERSION_STRING = 1.0
+  ENTRY_POINT    = UefiMain
+
+[Sources]
+  embedded_loader.cpp
+
+[Packages]
+  MdePkg/MdePkg.dec
+  MdeModulePkg/MdeModulePkg.dec
+
+[LibraryClasses]
+  UefiApplicationEntryPoint
+  UefiBootServicesTableLib
+  UefiRuntimeServicesTableLib
+  UefiLib
+  MemoryAllocationLib
+  BaseMemoryLib
+  DevicePathLib
+
+[Guids]
+  gEfiGlobalVariableGuid
+  gEfiImageSecurityDatabaseGuid
+
+[BuildOptions]
+  MSFT:*_*_*_CC_FLAGS = /I$(MODULE_DIR)\..\..\edk2\generated /WX-
