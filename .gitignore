@@ -1,17 +1,70 @@
+# EDK II and local build output
 Build/
 build/
+Conf/.cache/
+Conf/BuildEnv.sh
+Conf/target.txt
+Conf/tools_def.txt
+
+# Visual Studio and MSBuild state
 .vs/
-*.user
-*.log
-*.suo
-*.VC.db
-*.VC.VC.opendb
+ipch/
 x64/
+x86/
 Win32/
+ARM/
+ARM64/
 Debug/
 Release/
+bootkit/docs/legacy-editor/bootkit-editor/
+*.user
+*.suo
+*.sdf
+*.opensdf
+*.VC.db
+*.VC.VC.opendb
+*.aps
+*.tlog
+*.lastbuildstate
+
+# Compiler and linker artifacts
 *.obj
+*.iobj
+*.pdb
+*.ipdb
+*.idb
+*.ilk
+*.lib
+*.exp
+*.map
+*.log
+
+# Locally built binaries and firmware images
 *.exe
+*.dll
+*.sys
+*.efi
+*.EFI
+*.fd
+*.rom
+*.bin.tmp
+
+# Archives and local scratch files
 *.rar
+*.zip
+*.7z
+*.tmp
+*.bak
+*.orig
+
+# Python caches
+__pycache__/
+*.py[cod]
+
+# Private Secure Boot signing material
 tools/secure-boot-keys/*.key
 tools/secure-boot-keys/*.pfx
+tools/secure-boot-keys/*.pem
+tools/secure-boot-keys/*.der
+tools/secure-boot-keys/*.csr
+tools/secure-boot-keys/*.srl
